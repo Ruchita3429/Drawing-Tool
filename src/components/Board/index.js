@@ -28,6 +28,12 @@ const Board = () => {
       actionMenuItem === MENU_ITEMS.UNDO ||
       actionMenuItem === MENU_ITEMS.REDO
     ) {
+      // Check if there's history to undo/redo
+      if (drawHistory.current.length === 0) {
+        dispatch(actionItemClick(null));
+        return;
+      }
+
       if (historyPointer.current > 0 && actionMenuItem === MENU_ITEMS.UNDO)
         historyPointer.current -= 1;
       if (
